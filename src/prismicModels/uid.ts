@@ -1,6 +1,6 @@
 import { PrismicTypeBase } from "./base.js";
 
-export type PrismicUIDType = string | null;
+export type PrismicUIDType = null;
 
 interface PrismicUIDPrismicConfig {
     type: "UID";
@@ -29,9 +29,6 @@ export class PrismicUID extends PrismicTypeBase<PrismicUIDType, PrismicUIDPrismi
     }
 
     parse(value: unknown): PrismicUIDType {
-        if (typeof value === "string") return value;
-        if (typeof value === "number") return value.toString();
-
         return null;
     }
 

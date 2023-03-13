@@ -28,10 +28,9 @@ export type PrismicBaseField =
     | PrismicNumber
     | PrismicGeoPoint
     | PrismicTimestamp
-    | PrismicImage
-    | PrismicUID;
+    | PrismicImage;
 
-export type PrismicBaseFieldExtended = PrismicBaseField | PrismicGroup<any>;
+export type PrismicBaseFieldExtended = PrismicBaseField | PrismicGroup<any> | PrismicUID;
 
 export const P = {
     text: prismicText,
@@ -80,6 +79,7 @@ export function prismicFieldsObjectParse<T extends PrismicFieldsObject>(
     const parsedObject: PrismicFieldsObjectToType<T> = {} as PrismicFieldsObjectToType<T>;
 
     for (const [key, prismicField] of Object.entries(obj)) {
+        if(prismicField)
         parsedObject[key as keyof PrismicFieldsObjectToType<T>] = prismicField.parse((values as any)[key]) as any;
     }
 

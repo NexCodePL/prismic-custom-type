@@ -63,6 +63,7 @@ interface CustomTypeConfigTabType<TFields, TSlices> {
 
 interface CustomTypeItemType<TId, TTabs> {
     id: string;
+    uid: string | null;
     customType: TId;
     tabs: TTabs;
     alternateLanguages: [];
@@ -82,6 +83,7 @@ type GetTabType<TTab> = TTab extends CustomTypeConfigTab<infer TFields, infer TS
 
 interface PrismicCustomTypeRaw {
     id: string;
+    uid?: string | null;
     type: string;
     alternate_languages: [];
     data: any;
@@ -141,6 +143,7 @@ export class CustomType<TId extends string, TTabs extends CustomTypeConfigTabObj
 
         const item: CustomTypeItemType<TId, GetCustomTypeTTab<TTabs>> = {
             id: typeRaw.id,
+            uid: typeRaw.uid ?? null,
             alternateLanguages: [],
             customType: this.getId(),
             tabs: tabs,
