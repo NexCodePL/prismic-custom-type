@@ -71,7 +71,7 @@ export class Setup<T extends CustomType<any, any>[]> {
 
     private async insertCustomType(customType: CustomType<any, any>) {
         try {
-            const response = await axios({
+            await axios({
                 url: `https://customtypes.prismic.io/customtypes/insert`,
                 method: "POST",
                 headers: {
@@ -88,7 +88,7 @@ export class Setup<T extends CustomType<any, any>[]> {
 
     private async updateCustomType(customType: CustomType<any, any>) {
         try {
-            const response = await axios({
+            await axios({
                 url: `https://customtypes.prismic.io/customtypes/update`,
                 method: "POST",
                 headers: {
