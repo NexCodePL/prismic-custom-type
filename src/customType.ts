@@ -148,6 +148,13 @@ export class CustomType<TId extends string, TTabs extends CustomTypeConfigTabObj
 
         return item;
     }
+
+    is(item: unknown): item is CustomType<TId, TTabs> {
+        if (!item) return false;
+        if (typeof item !== "object") return false;
+
+        return (item as any)?.type === this.config.id;
+    }
 }
 
 function prepareJson(config: CustomTypeConfigTabObject): CustomTypePrismicJsonConfig {
