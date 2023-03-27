@@ -28,7 +28,7 @@ export class PrismicUID extends PrismicTypeBase<PrismicUIDType, PrismicUIDPrismi
         this.config = config;
     }
 
-    parse(value: unknown): PrismicUIDType {
+    parse(): PrismicUIDType {
         return null;
     }
 
