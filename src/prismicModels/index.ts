@@ -1,11 +1,14 @@
 import { GetPrismicTypeBaseType } from "./base.js";
 import { PrismicBoolean, prismicBoolean } from "./boolean.js";
 import { PrismicColor, prismicColor } from "./color.js";
+import { PrismicContentRelationship, prismicContentRelationship } from "./contentRelationship.js";
 import { PrismicDate, prismicDate } from "./date.js";
 import { PrismicEmbed, prismicEmbed } from "./embed.js";
 import { PrismicGeoPoint, prismicGeoPoint } from "./geoPoint.js";
 import { prismicGroup, PrismicGroup } from "./group.js";
 import { PrismicImage, prismicImage } from "./image.js";
+import { PrismicLink, prismicLink } from "./link.js";
+import { PrismicLinkMedia, prismicLinkMedia } from "./linkMedia.js";
 import { PrismicNumber, prismicNumber } from "./number.js";
 import {
     PrismicRichText,
@@ -21,11 +24,14 @@ import { PrismicUID, prismicUID } from "./uid.js";
 export * from "./base.js";
 export * from "./boolean.js";
 export * from "./color.js";
+export * from "./contentRelationship.js";
 export * from "./date.js";
 export * from "./embed.js";
 export * from "./geoPoint.js";
 export * from "./group.js";
 export * from "./image.js";
+export * from "./link.js";
+export * from "./linkMedia.js";
 export * from "./number.js";
 export * from "./richText.js";
 export * from "./select.js";
@@ -44,23 +50,29 @@ export type PrismicBaseField =
     | PrismicNumber
     | PrismicGeoPoint
     | PrismicTimestamp
-    | PrismicImage;
+    | PrismicImage
+    | PrismicContentRelationship
+    | PrismicLink
+    | PrismicLinkMedia;
 
 export type PrismicBaseFieldExtended = PrismicBaseField | PrismicGroup<any> | PrismicUID;
 
 export const P = {
-    text: prismicText,
-    richText: prismicRichText,
     boolean: prismicBoolean,
     color: prismicColor,
+    contentRelationship: prismicContentRelationship,
     date: prismicDate,
     embed: prismicEmbed,
-    number: prismicNumber,
     geoPoint: prismicGeoPoint,
-    timestamp: prismicTimestamp,
-    image: prismicImage,
-    uid: prismicUID,
     group: prismicGroup,
+    image: prismicImage,
+    link: prismicLink,
+    linkMedia: prismicLinkMedia,
+    number: prismicNumber,
+    richText: prismicRichText,
+    uid: prismicUID,
+    timestamp: prismicTimestamp,
+    text: prismicText,
     richTextFormattingDefaultText: prismicRichTextFormattingDefaultText,
     richTextFormattingDefaultTextWithHeadings: prismicRichTextFormattingDefaultTextWithHeadings,
     richTextFormattingDefaultTextWithTitle: prismicRichTextFormattingDefaultTextWithTitle,
