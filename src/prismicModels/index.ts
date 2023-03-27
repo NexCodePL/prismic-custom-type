@@ -18,6 +18,22 @@ import { PrismicText, prismicText } from "./text.js";
 import { PrismicTimestamp, prismicTimestamp } from "./timestamp.js";
 import { PrismicUID, prismicUID } from "./uid.js";
 
+export * from "./base.js";
+export * from "./boolean.js";
+export * from "./color.js";
+export * from "./date.js";
+export * from "./embed.js";
+export * from "./geoPoint.js";
+export * from "./group.js";
+export * from "./image.js";
+export * from "./number.js";
+export * from "./richText.js";
+export * from "./select.js";
+export * from "./text.js";
+export * from "./timestamp.js";
+export * from "./types.js";
+export * from "./uid.js";
+
 export type PrismicBaseField =
     | PrismicRichText
     | PrismicText
@@ -79,8 +95,8 @@ export function prismicFieldsObjectParse<T extends PrismicFieldsObject>(
     const parsedObject: PrismicFieldsObjectToType<T> = {} as PrismicFieldsObjectToType<T>;
 
     for (const [key, prismicField] of Object.entries(obj)) {
-        if(prismicField)
-        parsedObject[key as keyof PrismicFieldsObjectToType<T>] = prismicField.parse((values as any)[key]) as any;
+        if (prismicField)
+            parsedObject[key as keyof PrismicFieldsObjectToType<T>] = prismicField.parse((values as any)[key]) as any;
     }
 
     return parsedObject;
