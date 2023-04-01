@@ -61,12 +61,17 @@ interface CustomTypeConfigTabType<TFields, TSlices> {
     slices: TSlices;
 }
 
+interface CustomTypeItemAlternateLocale {
+    id: string;
+    locale: string;
+}
+
 interface CustomTypeItemType<TId, TTabs> {
     id: string;
     uid: string | null;
     customType: TId;
     tabs: TTabs;
-    alternateLanguages: [];
+    alternateLocales: CustomTypeItemAlternateLocale[];
 }
 
 type MapArray<T> = T extends Array<infer TItem> ? TItem : never;
@@ -81,11 +86,18 @@ type GetTabType<TTab> = TTab extends CustomTypeConfigTab<infer TFields, infer TS
     ? CustomTypeConfigTabType<PrismicFieldsObjectToType<TFields>, Array<GetCustomSliceType<MapArray<TSlices>>>>
     : never;
 
+interface PrismicCustomTypeRawAlternateLanguage {
+    id: string;
+    type: string;
+    lang: string;
+    uid?: string | null;
+}
+
 interface PrismicCustomTypeRaw {
     id: string;
     uid?: string | null;
     type: string;
-    alternate_languages: [];
+    alternate_languages: PrismicCustomTypeRawAlternateLanguage[];
     data: any;
 }
 
@@ -141,10 +153,15 @@ export class CustomType<TId extends string, TTabs extends CustomTypeConfigTabObj
             (tabs as any)[key] = parsedTab;
         }
 
+        const alternateLocales = typeRaw.alternate_languages.map<CustomTypeItemAlternateLocale>(al => ({
+            id: al.id,
+            locale: al.lang,
+        }));
+
         const item: CustomTypeItemType<TId, GetCustomTypeTTab<TTabs>> = {
             id: typeRaw.id,
             uid: typeRaw.uid ?? null,
-            alternateLanguages: [],
+            alternateLocales: alternateLocales,
             customType: this.getId(),
             tabs: tabs,
         };
@@ -157,6 +174,10 @@ export class CustomType<TId extends string, TTabs extends CustomTypeConfigTabObj
         if (typeof item !== "object") return false;
 
         return (item as any)?.type === this.config.id;
+    }
+
+    isRaw(item: PrismicCustomTypeRaw): boolean {
+        return item?.type === this.getId();
     }
 }
 

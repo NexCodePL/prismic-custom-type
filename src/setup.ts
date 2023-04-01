@@ -1,8 +1,8 @@
 import axios, { AxiosResponse } from "axios";
 import fetch from "node-fetch";
 import { createClient, getRepositoryEndpoint } from "@prismicio/client";
+import { writeFile } from "@nexcodepl/fs";
 import { CustomType } from "./customType.js";
-import { writeFileSafe } from "./utils.js";
 
 export interface SetupConfig {
     repository: string;
@@ -60,7 +60,7 @@ export class Setup<T extends CustomType<any, any>[]> {
 
             const customTypes = response.data;
 
-            writeFileSafe(`./raw/custom-types-backup-${Date.now()}.json`, JSON.stringify(response.data));
+            await writeFile(`./custom-types-snapshots/custom-types-snapshot-${Date.now()}.json`, JSON.stringify(response.data));
 
             return customTypes;
         } catch (e) {
