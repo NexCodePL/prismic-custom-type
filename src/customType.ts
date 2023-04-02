@@ -66,7 +66,7 @@ interface CustomTypeItemAlternateLocale {
     locale: string;
 }
 
-interface CustomTypeItemType<TId, TTabs> {
+export interface CustomTypeItemType<TId, TTabs> {
     id: string;
     uid: string | null;
     customType: TId;
