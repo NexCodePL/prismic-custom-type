@@ -56,7 +56,7 @@ export interface CustomTypeConfig<TId extends string, TTabs extends CustomTypeCo
     tabs: TTabs;
 }
 
-interface CustomTypeConfigTabType<TFields, TSlices> {
+export interface CustomTypeConfigTabType<TFields, TSlices> {
     fields: TFields;
     slices: TSlices;
 }
