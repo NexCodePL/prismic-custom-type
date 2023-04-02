@@ -18,7 +18,7 @@ interface PrismicContentRelationshipPrismicConfig {
 export interface PrismicContentRelationshipConfig {
     label: string;
     placeholder?: string;
-    customTypes: CustomType<any, any>[];
+    customTypes: (CustomType<any, any> | string )[];
     tags?: string[];
 }
 
@@ -67,7 +67,7 @@ export class PrismicContentRelationship extends PrismicTypeBase<
                 label: this.config.label,
                 placeholder: this.config.placeholder,
                 select: "document",
-                customtypes: this.config.customTypes.map(ct => ct.getId()),
+                customtypes: this.config.customTypes.map(ct => typeof ct === "string" ? ct : ct.getId()),
                 tags: this.config.tags ?? [],
             },
         };
