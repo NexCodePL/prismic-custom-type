@@ -7,6 +7,6 @@ export const sliceFragment = new CustomSlice({
     name: "Fragment",
     type: "fragment",
     nonRepeat: {
-        fragment: P.contentRelationship({ label: "Fragment", customTypes: ["fragment"] }),
+        fragment: P.contentRelationship({ label: "Fragment", customTypes: ["Fragment"] }),
     },
 });
