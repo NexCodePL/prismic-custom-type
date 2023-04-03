@@ -36,6 +36,7 @@ type PrismicRichTextConfigFormattingOption =
 export const prismicRichTextFormattingDefaultText: PrismicRichTextConfigFormattingOption[] = [
     "em",
     "embed",
+    "strong",
     "paragraph",
     "hyperlink",
     "list-item",
