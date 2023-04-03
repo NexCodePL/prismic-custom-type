@@ -72,6 +72,7 @@ export interface CustomTypeItemType<TId, TTabs> {
     uid: string | null;
     customType: TId;
     tabs: TTabs;
+    locale: string;
     alternateLocales: CustomTypeItemAlternateLocale[];
 }
 
@@ -114,7 +115,10 @@ export class CustomType<TId extends string, TTabs extends CustomTypeConfigTabObj
         };
     }
 
-    parse(typeRaw: PrismicItemRaw): CustomTypeItemType<TId, GetCustomTypeTTab<TTabs>> | null {
+    parse(
+        typeRaw: PrismicItemRaw,
+        overrideLocale?: string | ((locale: string) => string)
+    ): CustomTypeItemType<TId, GetCustomTypeTTab<TTabs>> | null {
         if (typeRaw.type !== this.getId()) return null;
 
         const tabs: GetCustomTypeTTab<TTabs> = {} as GetCustomTypeTTab<TTabs>;
@@ -144,12 +148,23 @@ export class CustomType<TId extends string, TTabs extends CustomTypeConfigTabObj
             locale: al.lang,
         }));
 
+        let locale = typeRaw.lang;
+
+        if (overrideLocale) {
+            if (typeof overrideLocale === "function") {
+                locale = overrideLocale(locale);
+            } else if (typeof overrideLocale === "string") {
+                locale = overrideLocale;
+            }
+        }
+
         const item: CustomTypeItemType<TId, GetCustomTypeTTab<TTabs>> = {
             id: typeRaw.id,
             uid: typeRaw.uid ?? null,
             alternateLocales: alternateLocales,
             customType: this.getId(),
             tabs: tabs,
+            locale,
         };
 
         return item;
