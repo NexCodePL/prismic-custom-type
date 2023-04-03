@@ -9,6 +9,7 @@ export interface PrismicItemRaw {
     id: string;
     uid?: string | null;
     type: string;
+    lang: string;
     alternate_languages: PrismicItemRawAlternateLanguage[];
     data: any;
 }
