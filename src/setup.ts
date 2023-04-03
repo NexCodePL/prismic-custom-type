@@ -12,6 +12,14 @@ export interface SetupConfig {
 
 type PrismicCustomTypeResponse = { id: string }[];
 
+interface PrismicItemRaw {
+    id: string;
+    uid?: string | null;
+    type: string;
+    lang: string;
+    data: any;
+}
+
 export class Setup<T extends CustomType<any, any>[]> {
     private customTypes: T;
     private config: SetupConfig;
@@ -28,7 +36,7 @@ export class Setup<T extends CustomType<any, any>[]> {
     }
 
     async load() {
-        const results: any[] = [];
+        const results: PrismicItemRaw[] = [];
         const endpoint = getRepositoryEndpoint(this.config.repository);
         const client = createClient(endpoint, { accessToken: this.config.token, fetch });
 
@@ -46,7 +54,7 @@ export class Setup<T extends CustomType<any, any>[]> {
             }
         }
 
-        return results as any[];
+        return results as PrismicItemRaw[];
     }
 
     private async getExistingCustomTypes() {
@@ -60,7 +68,10 @@ export class Setup<T extends CustomType<any, any>[]> {
 
             const customTypes = response.data;
 
-            await writeFile(`./custom-types-snapshots/custom-types-snapshot-${Date.now()}.json`, JSON.stringify(response.data));
+            await writeFile(
+                `./custom-types-snapshots/custom-types-snapshot-${Date.now()}.json`,
+                JSON.stringify(response.data)
+            );
 
             return customTypes;
         } catch (e) {
