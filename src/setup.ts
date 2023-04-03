@@ -3,6 +3,7 @@ import fetch from "node-fetch";
 import { createClient, getRepositoryEndpoint } from "@prismicio/client";
 import { writeFile } from "@nexcodepl/fs";
 import { CustomType } from "./customType.js";
+import { PrismicItemRaw } from "./types.js";
 
 export interface SetupConfig {
     repository: string;
@@ -11,14 +12,6 @@ export interface SetupConfig {
 }
 
 type PrismicCustomTypeResponse = { id: string }[];
-
-interface PrismicItemRaw {
-    id: string;
-    uid?: string | null;
-    type: string;
-    lang: string;
-    data: any;
-}
 
 export class Setup<T extends CustomType<any, any>[]> {
     private customTypes: T;

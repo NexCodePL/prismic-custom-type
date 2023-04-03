@@ -5,6 +5,7 @@ import {
     prismicFieldsObjectToConfig,
 } from "./prismicModels/index.js";
 import { CustomSlice, GetCustomSliceType } from "./customSlice.js";
+import { PrismicItemRaw } from "./types.js";
 
 // Prismic output types
 interface CustomTypePrismicConfigTab {
@@ -86,21 +87,6 @@ type GetTabType<TTab> = TTab extends CustomTypeConfigTab<infer TFields, infer TS
     ? CustomTypeConfigTabType<PrismicFieldsObjectToType<TFields>, Array<GetCustomSliceType<MapArray<TSlices>>>>
     : never;
 
-interface PrismicCustomTypeRawAlternateLanguage {
-    id: string;
-    type: string;
-    lang: string;
-    uid?: string | null;
-}
-
-interface PrismicCustomTypeRaw {
-    id: string;
-    uid?: string | null;
-    type: string;
-    alternate_languages: PrismicCustomTypeRawAlternateLanguage[];
-    data: any;
-}
-
 export type GetCustomTypeType<T> = T extends CustomType<infer TId, infer TTabs>
     ? CustomTypeItemType<TId, GetCustomTypeTTab<TTabs>>
     : never;
@@ -128,7 +114,7 @@ export class CustomType<TId extends string, TTabs extends CustomTypeConfigTabObj
         };
     }
 
-    parse(typeRaw: PrismicCustomTypeRaw): CustomTypeItemType<TId, GetCustomTypeTTab<TTabs>> | null {
+    parse(typeRaw: PrismicItemRaw): CustomTypeItemType<TId, GetCustomTypeTTab<TTabs>> | null {
         if (typeRaw.type !== this.getId()) return null;
 
         const tabs: GetCustomTypeTTab<TTabs> = {} as GetCustomTypeTTab<TTabs>;
@@ -176,7 +162,7 @@ export class CustomType<TId extends string, TTabs extends CustomTypeConfigTabObj
         return (item as any)?.type === this.config.id;
     }
 
-    isRaw(item: PrismicCustomTypeRaw): boolean {
+    isRaw(item: PrismicItemRaw): boolean {
         return item?.type === this.getId();
     }
 }
