@@ -13,6 +13,7 @@ interface PrismicTextPrismicConfig {
 export interface PrismicTextConfig {
     label: string;
     placeholder?: string;
+    default?: string;
 }
 
 export class PrismicText extends PrismicTypeBase<PrismicTextType, PrismicTextPrismicConfig> {
@@ -32,7 +33,7 @@ export class PrismicText extends PrismicTypeBase<PrismicTextType, PrismicTextPri
         if (typeof value === "string") return value;
         if (typeof value === "number") return value.toString();
 
-        return null;
+        return this.config.default ?? null;
     }
 
     getPrismicConfig(): PrismicTextPrismicConfig {

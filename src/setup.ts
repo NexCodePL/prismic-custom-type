@@ -62,7 +62,7 @@ export class Setup<T extends CustomType<any, any>[]> {
             const customTypes = response.data;
 
             await writeFile(
-                `./custom-types-snapshots/custom-types-snapshot-${Date.now()}.json`,
+                `./custom-types-snapshots/${this.config.repository}-custom-types-snapshot-${Date.now()}.json`,
                 JSON.stringify(response.data)
             );
 
