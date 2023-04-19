@@ -5,7 +5,7 @@ import { sliceFragment, SliceFragmentType } from "./SliceFragment.js";
 export type FragmentType = GetCustomTypeType<ReturnType<typeof getFragment>["fragment"]>;
 
 type FragmentMap = Record<string, FragmentType>;
-type Slice = CustomSliceType<any, any, any>;
+type Slice = CustomSliceType<any, any, any, any>;
 type FragmentSlicesMap = Record<string, Slice[]>;
 
 export function getFragment<T extends CustomSlice<string, any, any>>(slices: T[]) {
