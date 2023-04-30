@@ -17,6 +17,7 @@ import {
     prismicRichTextFormattingDefaultTextWithHeadings,
     prismicRichTextFormattingDefaultTextWithTitle,
 } from "./richText.js";
+import { PrismicSelect, prismicSelect } from "./select.js";
 import { PrismicText, prismicText } from "./text.js";
 import { PrismicTimestamp, prismicTimestamp } from "./timestamp.js";
 import { PrismicUID, prismicUID } from "./uid.js";
@@ -53,6 +54,7 @@ export type PrismicBaseField =
     | PrismicImage
     | PrismicContentRelationship
     | PrismicLink
+    | PrismicSelect
     | PrismicLinkMedia;
 
 export type PrismicBaseFieldExtended = PrismicBaseField | PrismicGroup<any> | PrismicUID;
@@ -73,6 +75,7 @@ export const P = {
     uid: prismicUID,
     timestamp: prismicTimestamp,
     text: prismicText,
+    select: prismicSelect,
     richTextFormattingDefaultText: prismicRichTextFormattingDefaultText,
     richTextFormattingDefaultTextWithHeadings: prismicRichTextFormattingDefaultTextWithHeadings,
     richTextFormattingDefaultTextWithTitle: prismicRichTextFormattingDefaultTextWithTitle,

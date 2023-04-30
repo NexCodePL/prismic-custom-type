@@ -47,3 +47,5 @@ export class PrismicSelect extends PrismicTypeBase<PrismicSelectType, PrismicSel
         };
     }
 }
+
+export const prismicSelect = (config: PrismicSelectConfig)=> new PrismicSelect(config);
