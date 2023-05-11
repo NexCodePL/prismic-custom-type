@@ -4,6 +4,7 @@ import {
     prismicFieldsObjectToConfig,
     PrismicFieldsObjectToType,
 } from "./prismicModels/index.js";
+import cloneDeep from "lodash.clonedeep";
 
 export interface CustomSliceConfig<
     TType extends string,
@@ -64,7 +65,7 @@ export class CustomSlice<
             type: this.config.type,
             nonRepeat: prismicFieldsObjectParse<TNonRepeat>(this.config.nonRepeat as TNonRepeat, sliceRaw.primary),
             repeat: sliceRaw.items.map(i => prismicFieldsObjectParse<TRepeat>(this.config.repeat as TRepeat, i)),
-            extended: this.defaultExtended,
+            extended: cloneDeep(this.defaultExtended),
         };
     }
 
