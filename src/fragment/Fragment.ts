@@ -4,9 +4,9 @@ import { sliceFragment, SliceFragmentType } from "./SliceFragment.js";
 
 export type FragmentType = GetCustomTypeType<ReturnType<typeof getFragment>["fragment"]>;
 
-type FragmentMap = Record<string, FragmentType>;
-type Slice = CustomSliceType<any, any, any, any>;
-type FragmentSlicesMap = Record<string, Slice[]>;
+export type FragmentMap = Record<string, FragmentType>;
+export type FragmentSlice = CustomSliceType<any, any, any, any>;
+export type FragmentSlicesMap = Record<string, FragmentSlice[]>;
 
 export function getFragment<T extends CustomSlice<string, any, any>>(slices: T[]) {
     const fragment = new CustomType({
@@ -65,8 +65,8 @@ export function getFragment<T extends CustomSlice<string, any, any>>(slices: T[]
         visitedFragments: string[],
         fragment: FragmentType,
         fragmentMap: FragmentMap
-    ): Slice[] {
-        const slices: Slice[] = [];
+    ): FragmentSlice[] {
+        const slices: FragmentSlice[] = [];
 
         for (const slice of fragment.tabs.Main.slices) {
             if (slice.type === "fragment") {
