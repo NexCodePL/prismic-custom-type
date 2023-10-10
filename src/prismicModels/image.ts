@@ -73,6 +73,7 @@ export class PrismicImage extends PrismicTypeBase<PrismicImageType, PrismicImage
             alt: valueO.alt ?? undefined,
             width: valueO.dimensions?.width ?? undefined,
             height: valueO.dimensions?.height ?? undefined,
+            copyright: valueO.copyright ?? undefined,
         };
     }
 

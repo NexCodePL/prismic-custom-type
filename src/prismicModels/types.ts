@@ -3,6 +3,7 @@ export interface ImageData {
     alt?: string;
     width?: number;
     height?: number;
+    copyright?: string;
 }
 
 interface LinkBase<T extends string> {
