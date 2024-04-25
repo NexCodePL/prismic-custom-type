@@ -70,7 +70,7 @@ export function getFragment<T extends CustomSlice<string, any, any>>(slices: T[]
 
         for (const slice of fragment.tabs.Main.slices) {
             if (slice.type === "fragment") {
-                const fragmentId = (!slice.nonRepeat.fragment as any)?.id;
+                const fragmentId = (slice.nonRepeat.fragment as any)?.id;
                 if (!fragmentId) continue;
                 if (visitedFragments.includes(fragmentId)) continue;
                 const refFragment = fragmentMap[fragmentId];
