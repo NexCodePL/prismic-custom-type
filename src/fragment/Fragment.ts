@@ -45,18 +45,22 @@ export function getFragment<T extends CustomSlice<string, any, any>>(slices: T[]
 
     function replaceFragments(item: CustomTypeItemType<any, any>, fragmentsMap: FragmentSlicesMap) {
         for (const tab of Object.values<CustomTypeConfigTabType<any, SliceFragmentType[]>>(item.tabs)) {
-            for (let i = tab.slices.length - 1; i >= 0; i--) {
-                const slice = tab.slices[i];
+            replaceFragmentsInArray(tab.slices, fragmentsMap);
+        }
+    }
 
-                if (!slice) continue;
+    function replaceFragmentsInArray(slices: SliceFragmentType[], fragmentsMap: FragmentSlicesMap) {
+        for (let i = slices.length - 1; i >= 0; i--) {
+            const slice = slices[i];
 
-                if (slice.type === "fragment") {
-                    const fragmentId = slice.nonRepeat.fragment?.id;
-                    if (!fragmentId) continue;
-                    const fragmentSlices = fragmentsMap[fragmentId] ?? [];
+            if (!slice) continue;
 
-                    tab.slices.splice(i, 1, ...fragmentSlices);
-                }
+            if (slice.type === "fragment") {
+                const fragmentId = slice.nonRepeat.fragment?.id;
+                if (!fragmentId) continue;
+                const fragmentSlices = fragmentsMap[fragmentId] ?? [];
+
+                slices.splice(i, 1, ...fragmentSlices);
             }
         }
     }
@@ -84,5 +88,5 @@ export function getFragment<T extends CustomSlice<string, any, any>>(slices: T[]
         return slices;
     }
 
-    return { fragment, prepareFragmentMap, replaceFragments };
+    return { fragment, prepareFragmentMap, replaceFragments, replaceFragmentsInArray };
 }
